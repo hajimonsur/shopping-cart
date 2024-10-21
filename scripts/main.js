@@ -56,7 +56,9 @@ function displayProducts() {
 
         <div class=subAdd>
           <button class=sub>-</button>
-          <h6>${item.quantity}</h6>
+
+          <h4>${item.quantity}</h4>
+          
           <button class=add>+</button>
         </div>
      
@@ -70,58 +72,6 @@ function displayProducts() {
   }
 }
 displayProducts();
-
-// handle remove dynamically
-
-let removeElem = document.getElementsByClassName("remove");
-
-for (let sub of removeElem) {
-  sub.addEventListener("click", function () {
-    let parentElem = sub.parentElement;
-    let clearElem = parentElem.parentElement;
-    clearElem.remove();
-
-    // Update cart summary
-  });
-}
-
-
-// plus and minus
-
-let subElem = document.getElementsByClassName("sub");
-let addElem = document.getElementsByClassName("add");
-
-for (let sub of subElem) {
-  sub.addEventListener("click", function () {
-    let parentElem = sub.parentElement;
-    let clearElem = parentElem.parentElement;
-    let quantityElem = clearElem.querySelector(`${".subAdd"} h6`);
-    let quantity = parseInt(quantityElem.textContent);
-    if (quantity > 0) {
-      quantity--;
-      quantityElem.textContent = quantity;
-    }
-  });
-}
-
-for (let add of addElem) {
-  add.addEventListener("click", function () {
-    let parentElem = add.parentElement;
-    let clearElem = parentElem.parentElement;
-    let quantityElem = clearElem.querySelector(`${".subAdd"} h6`);
-    let quantity = parseInt(quantityElem.textContent);
-    quantity++;
-    quantityElem.textContent = quantity;
-    
-
-
-    displaySummary()
-  });
-
-  
-}
-
-
 
 
 let titleElem = document.getElementById("title");
@@ -145,7 +95,7 @@ function displaySummary() {
     `;
 
   summarybtnElem.innerHTML = `
-    <h3>Checkout (${totalAmount})</h3>
+    <h3 class =total>Checkout ( N ${totalAmount})</h3>
     `;
 
   summaryElem.setAttribute("id", "flex1");
@@ -154,3 +104,139 @@ function displaySummary() {
 }
 
 displaySummary();
+
+
+// handle remove dynamically
+
+
+let removeElem = document.getElementsByClassName("remove");
+
+for (let sub of removeElem) {
+  sub.addEventListener("click", function () {
+    let parentElem = sub.parentElement;
+    let clearElem = parentElem.parentElement;
+    clearElem.remove();
+
+    // Update cart summary
+    titleElem.textContent = ` Cart (${totalQuantity} items)`;
+  });
+}
+
+
+// plus and minus
+
+let subElem = document.getElementsByClassName("sub");
+let addElem = document.getElementsByClassName("add");
+
+
+for (let sub of subElem) {
+  sub.addEventListener("click", function () {
+    cartProducts.find((item) => {
+      let minus = ` ${item.quantity}`;
+
+      if (item && item.quantity > 0) {
+        minus--;
+        item.quantity = minus;
+        
+     
+
+    
+        console.log(minus);
+   
+     
+      displaySummary();
+      }
+
+  })
+})
+}
+
+
+for (let add of addElem) {
+  add.addEventListener("click", function () {
+    cartProducts.find((item) => {
+      let plus = ` ${item.quantity}`;
+      if (item && item.quantity > 0) {
+        plus++;
+        item.quantity = plus;
+        console.log(plus);
+        displaySummary();
+      }
+    });
+  });
+}
+     
+    
+
+
+
+
+  
+
+
+ 
+//     if (quantity > 0) {
+//       quantity--;
+//       quantityElem.textContent = quantity;
+      
+
+//       displaySummary();
+//     }
+//   });
+// }
+
+// for (let add of addElem) {
+//   add.addEventListener("click", function () {
+//     let parentElem = add.parentElement;
+//     let clearElem = parentElem.parentElement;
+//     let quantityElem = clearElem.querySelector(`${".subAdd"} h6`);
+//     let quantity = parseInt(quantityElem.textContent);
+//     quantity++;
+//     quantityElem.textContent = quantity;
+    
+
+
+//     displaySummary()
+//   });
+
+  
+// }
+
+
+// let parentElem = sub.parentElement;
+// let clearElem = parentElem.parentElement;
+// let quantityElem = clearElem.querySelector(`${".subAdd"} ${item.quantity}`);
+// let quantity = parseInt(quantityElem.textContent);
+
+
+  // // Handle quantity changes with animation
+  // function updateQuantity(productId, change) {
+  //   const product = cartProducts.find(item => item.id === productId);
+  //   if (!product) return;
+  
+  //   const newQuantity = product.quantity + change;
+    
+  //   // Check boundaries
+  //   if (newQuantity < 0 || newQuantity > product.stock) {
+  //     // Add shake animation to button
+  //     const button = change > 0 ? 
+  //       document.querySelector(`[data-product-id="${productId}"] .add`) :
+  //       document.querySelector(`[data-product-id="${productId}"] .sub`);
+  //     button.classList.add('shake');
+  //     setTimeout(() => button.classList.remove('shake'), 500);
+  //     return;
+  //   }
+  
+  //   const quantityDisplay = document.querySelector(`[data-product-id="${productId}"] .quantity-value`);
+  //   quantityDisplay.classList.add('update');
+  //   setTimeout(() => quantityDisplay.classList.remove('update'), 300);
+  
+  //   product.quantity = newQuantity;
+  //   updateQuantityDisplay(productId, newQuantity);
+  //   updateSummary();
+  // }
+
+
+
+
+

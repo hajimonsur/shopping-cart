@@ -53,6 +53,8 @@ main {
     text-align: center;
     border-radius: 25px;
     cursor: pointer;
+    position: relative;
+
 }
 
 .description {
@@ -71,9 +73,11 @@ main {
     flex-direction: row;
     float: right;
     /* margin-left: 50px; */
-    
-    /* height:30px ; */
- 
+    align-items: center;
+    height:30px ;
 
-    /* padding-top: 30px; */
+ 
+}
+
+.total {
 }
