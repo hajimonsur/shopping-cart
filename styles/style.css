@@ -1,0 +1,79 @@
+#container {
+    display: flex;
+    
+}
+
+main {
+    background-color: rgb(225, 230, 230);
+}
+
+#leftbox {
+    width: 60%;
+    margin: 20px;
+    background-color:#fff;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+#rightbox {
+    width: 30%;
+    margin: 20px;
+    background-color:#fff;
+    border-radius: 25px;
+    padding: 20px;
+}
+
+#flex {
+    display: flex;
+  
+}
+
+.name {
+    padding: 100px;
+}
+
+#flex1 {
+    display: flex;
+    justify-content: space-around;
+   
+}
+/* 
+#count {
+    display: flex;
+    justify-content: space-between;
+} */
+
+#summarybtn {
+    background-color: orange;
+    ;
+    width: 70%;
+    height: 10%;
+    margin: 50px;
+    padding: 1px 0px;
+    text-align: center;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.description {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 30px;
+}
+
+.buttom {
+    /* display: flex; */
+  
+  }
+
+.subAdd {
+    display: flex;
+    flex-direction: row;
+    float: right;
+    /* margin-left: 50px; */
+    
+    /* height:30px ; */
+ 
+
+    /* padding-top: 30px; */
+}
