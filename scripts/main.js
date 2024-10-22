@@ -163,4 +163,6 @@ for (let i = 0; i < addElem.length; i++) {
       this.previousElementSibling.textContent = item.quantity;
     }
   });
+
 }
+
