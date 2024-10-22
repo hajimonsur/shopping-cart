@@ -108,135 +108,59 @@ displaySummary();
 
 // handle remove dynamically
 
-
+// handle remove dynamically
 let removeElem = document.getElementsByClassName("remove");
 
-for (let sub of removeElem) {
-  sub.addEventListener("click", function () {
-    let parentElem = sub.parentElement;
+for (let i = 0; i < removeElem.length; i++) {
+  removeElem[i].addEventListener("click", function () {
+    let parentElem = removeElem[i].parentElement;
     let clearElem = parentElem.parentElement;
+    
+    // Get the item ID to remove from the cartProducts array
+    let itemId = cartProducts[i].id;
+
+    // Remove the item from the cartProducts array
+    cartProducts.splice(i, 1);
     clearElem.remove();
 
-    // Update cart summary
+    // Update the cart summary
+    displaySummary();
+    
+    // Update the title
+    let totalQuantity = cartProducts.reduce((sum, item) => sum + item.quantity, 0);
     titleElem.textContent = ` Cart (${totalQuantity} items)`;
   });
 }
 
 
-// plus and minus
 
 let subElem = document.getElementsByClassName("sub");
 let addElem = document.getElementsByClassName("add");
 
 
-for (let sub of subElem) {
-  sub.addEventListener("click", function () {
-    cartProducts.find((item) => {
-      let minus = ` ${item.quantity}`;
-
-      if (item && item.quantity > 0) {
-        minus--;
-        item.quantity = minus;
-        
-     
-
-    
-        console.log(minus);
-   
-     
+//  minus function
+for (let i = 0; i < subElem.length; i++) {
+  subElem[i].addEventListener("click", function () {
+    let item = cartProducts[i];
+    if (item.quantity > 0) {
+      item.quantity--;
       displaySummary();
-      }
-
-  })
-})
-}
-
-
-for (let add of addElem) {
-  add.addEventListener("click", function () {
-    cartProducts.find((item) => {
-      let plus = ` ${item.quantity}`;
-      if (item && item.quantity > 0) {
-        plus++;
-        item.quantity = plus;
-        console.log(plus);
-        displaySummary();
-      }
-    });
+      // Update the displayed quantity
+      this.nextElementSibling.textContent = item.quantity;
+    }
   });
 }
-     
-    
 
+// plus function
 
-
-
-  
-
-
- 
-//     if (quantity > 0) {
-//       quantity--;
-//       quantityElem.textContent = quantity;
-      
-
-//       displaySummary();
-//     }
-//   });
-// }
-
-// for (let add of addElem) {
-//   add.addEventListener("click", function () {
-//     let parentElem = add.parentElement;
-//     let clearElem = parentElem.parentElement;
-//     let quantityElem = clearElem.querySelector(`${".subAdd"} h6`);
-//     let quantity = parseInt(quantityElem.textContent);
-//     quantity++;
-//     quantityElem.textContent = quantity;
-    
-
-
-//     displaySummary()
-//   });
-
-  
-// }
-
-
-// let parentElem = sub.parentElement;
-// let clearElem = parentElem.parentElement;
-// let quantityElem = clearElem.querySelector(`${".subAdd"} ${item.quantity}`);
-// let quantity = parseInt(quantityElem.textContent);
-
-
-  // // Handle quantity changes with animation
-  // function updateQuantity(productId, change) {
-  //   const product = cartProducts.find(item => item.id === productId);
-  //   if (!product) return;
-  
-  //   const newQuantity = product.quantity + change;
-    
-  //   // Check boundaries
-  //   if (newQuantity < 0 || newQuantity > product.stock) {
-  //     // Add shake animation to button
-  //     const button = change > 0 ? 
-  //       document.querySelector(`[data-product-id="${productId}"] .add`) :
-  //       document.querySelector(`[data-product-id="${productId}"] .sub`);
-  //     button.classList.add('shake');
-  //     setTimeout(() => button.classList.remove('shake'), 500);
-  //     return;
-  //   }
-  
-  //   const quantityDisplay = document.querySelector(`[data-product-id="${productId}"] .quantity-value`);
-  //   quantityDisplay.classList.add('update');
-  //   setTimeout(() => quantityDisplay.classList.remove('update'), 300);
-  
-  //   product.quantity = newQuantity;
-  //   updateQuantityDisplay(productId, newQuantity);
-  //   updateSummary();
-  // }
-
-
-
-
-
+for (let i = 0; i < addElem.length; i++) {
+  addElem[i].addEventListener("click", function () {
+    let item = cartProducts[i];
+    if (item.quantity < item.stock) {
+      item.quantity++;
+      displaySummary();
+      // Update the displayed quantity
+      this.previousElementSibling.textContent = item.quantity;
+    }
+  });
+}
